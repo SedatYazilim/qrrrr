@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dersteyim - QR Okuyucu</title>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef2f7; margin: 0; color: #253047; }
+    main { max-width: 420px; margin: 65px auto; padding: 25px; background: white; border-radius: 10px; box-shadow: 0 3px 14px #00000012; }
+    h1 { color: #2563eb; margin: 0 0 8px; font-size: 27px; }
+    p { line-height: 1.5; }
+    #reader { width: 100%; margin-top: 20px; }
+    #sonuc { background: #e7f7ed; color: #176534; padding: 12px; border-radius: 6px; overflow-wrap: anywhere; display: none; }
+    @media (max-width: 500px) { main { margin: 20px 12px; padding: 18px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Dersteyim</h1>
+    <p>QR kodu okumak için kameraya izin verin ve kodu kameraya gösterin.</p>
+    <div id="reader"></div>
+    <p id="sonuc"></p>
+  </main>
+  <script>
+    function qrOkundu(kod) {
+      var sonuc = document.getElementById("sonuc");
+      sonuc.style.display = "block";
+      sonuc.textContent = "Okunan kod: " + kod;
+    }
+
+    var okuyucu = new Html5QrcodeScanner("reader", {
+      fps: 10,
+      qrbox: { width: 220, height: 220 }
+    }, false);
+
+    okuyucu.render(qrOkundu);
+  </script>
+</body>
+</html>
